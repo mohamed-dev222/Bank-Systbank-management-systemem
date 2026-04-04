@@ -11,7 +11,7 @@ int main()
     cin >> Answer;
     while ((Answer == 'Y') || (Answer == 'y'))
     {
-
+        cout << "Hallo Word!\n";
         clsLoginScreen::ShowLoginScreen();
         cout << "Do you want to log in again?Y/N? ";
         cin >> Answer;

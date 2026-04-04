@@ -3,7 +3,6 @@
 using namespace std;
 
 
-
 int main()
 {
     char Answer = 'n';
@@ -15,5 +14,6 @@ int main()
         cout << "Do you want to log in again?Y/N? ";
         cin >> Answer;
     }
+    
     return 0;
 }

@@ -2,7 +2,9 @@
 #include <ctime>
 #include "clsDate.h"
 using namespace std;
-
+/*
+	The clsUtil class provides various utility functions for common operations, such as generating random numbers and characters, swapping values, and encrypting/decrypting text.
+*/
 	class clsUtil
 	{
 	public:

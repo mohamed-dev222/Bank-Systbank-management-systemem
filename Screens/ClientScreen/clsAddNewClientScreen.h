@@ -4,7 +4,9 @@
 #include "../../Core/clsInputValidate.h"
 #include "../../Models/clsBankClient.h"
 using namespace std;
-
+/*
+    This screen will be used to add new client to the system, only users with permissions to add new client can access this screen.
+*/
 class clsAddNewClientScreen : protected clsScreen  
 {
 private:

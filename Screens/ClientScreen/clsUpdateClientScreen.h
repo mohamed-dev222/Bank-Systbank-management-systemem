@@ -2,6 +2,11 @@
 #include "../../Models/clsScreen.h"
 #include "../../Core/clsInputValidate.h"
 #include "../../Models/clsBankClient.h"
+	
+/*
+ * This screen will be used to update information about a specific client in the system, only users with permissions to update clients can access this screen.
+ */
+
 class clsUpdateClientScreen :
     protected clsScreen
 {

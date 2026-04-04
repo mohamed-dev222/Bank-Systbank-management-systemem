@@ -10,6 +10,9 @@
 #include "../Screens/TransactionScreens/clsTransactionsScreen.h"
 #include "../Screens/UserScreen/clsManageUsersScreen.h"
 #include "../Global.h"
+/*
+    This screen will be used as the main entry point for the application, providing access to all available features based on the user's permissions.
+*/
 class clsMaineScreen : protected clsScreen
 {
 private:

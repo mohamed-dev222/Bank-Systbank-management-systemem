@@ -5,7 +5,9 @@
 #include "../../Models/clsUser.h"
 #include "../../Core/clsInputValidate.h"
 #include <iomanip>
-
+/*
+    This screen will be used to add new users to the system, only users with permissions to manage users can access this screen.
+*/
 class clsAddNewUserScreen : protected clsScreen
 {
 private:

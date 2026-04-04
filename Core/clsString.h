@@ -2,6 +2,10 @@
 #include <vector>
 #include <cctype>
 using namespace std;
+
+/*
+	The clsString class provides various functionalities for handling strings, including methods for manipulating and analyzing string content.
+*/
 class clsString
 {
 private:

@@ -3,6 +3,9 @@
 #include <string>
 #include "clsDate.h"
 using namespace std;
+/*
+	The clsInputValidate class provides static methods for validating user input, including methods for checking if a number is within a specified range, if a date is valid, and for reading different types of input from the user with error handling to ensure valid input is received.	
+*/
 class clsInputValidate
 {
 public:

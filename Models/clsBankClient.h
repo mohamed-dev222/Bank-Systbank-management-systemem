@@ -3,7 +3,9 @@
 #include "../Core/clsPerson.h"
 #include "../Core/clsString.h"
 #include <fstream>
+// The enum enMode is used to represent the mode of operation for a bank client, it can be either EmptyMode, UpdateMode, or AddNewMode.
 enum enMode { EmptyMode = 0, UpdateMode= 1, AddNewMode = 2};
+// The stAccountDate structure is used to store the account-related information for a bank client, including the mode of operation (empty, update, or add new), account number, pin code, and account balance.
 struct stAccountDate
 {
 	enMode Mode;
@@ -11,6 +13,7 @@ struct stAccountDate
 	string PinCode;
 	float AccountBalance;
 };
+// The clsBankClient class represents a bank client in the system, it inherits from clsPerson and contains additional information related to the client's bank account, such as account number, pin code, and account balance. It also includes methods for loading and saving client data to a file, as well as methods for updating and adding new clients.
 class clsBankClient : public clsPerson
 {
 private:

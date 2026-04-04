@@ -4,7 +4,9 @@
 #include "../../Models/clsScreen.h"
 #include "../../Models/clsBankClient.h"
 #include "../../Core/clsInputValidate.h"
-
+/*
+    This screen will be used to perform deposit transactions for a specific client in the system, only users with permissions to perform transactions can access this screen.
+*/
 class clsDepositScreen : protected clsScreen
 {
 

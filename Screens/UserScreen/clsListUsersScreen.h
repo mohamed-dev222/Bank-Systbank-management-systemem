@@ -2,6 +2,9 @@
 #include "../../Models/clsScreen.h"
 #include "../../Models/clsUser.h"
 #include <iomanip>
+/*
+    This screen will be used to display a list of all users in the system, only users with permissions to view user lists can access this screen.
+*/
 class clsListUsersScreen :
     protected clsScreen
 {

@@ -1,6 +1,9 @@
 #pragma once
 #include <string>
 using namespace std;
+/*
+	The stPersonInfo structure is used to store the basic information of a person, including their first name, last name, email, and phone number.
+*/
 struct stPersonInfo
 {
 	string FirstName;

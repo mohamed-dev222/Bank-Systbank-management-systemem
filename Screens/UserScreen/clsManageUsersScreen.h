@@ -10,7 +10,9 @@
 #include <iomanip>
 
 using namespace std;
-
+/*  
+    This screen will be used to manage users in the system, only users with permissions to manage users can access this screen.
+*/
 class clsManageUsersScreen :protected clsScreen
 {
 

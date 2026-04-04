@@ -2,6 +2,11 @@
 #include "../../Models/clsScreen.h"
 #include "../../Models/clsBankClient.h"
 #include "../../Core/clsInputValidate.h"
+
+/*
+ * This screen will be used to find and display information about a specific client in the system, only users with permissions to find clients can access this screen.
+ */
+
 class clsShowFindClientScreen :
     protected clsScreen
 {

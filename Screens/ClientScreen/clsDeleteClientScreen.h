@@ -2,6 +2,10 @@
 #include "../../Models/clsScreen.h"
 #include "../../Core/clsInputValidate.h"
 #include "../../Models/clsBankClient.h"
+
+/**
+ * This screen will be used to delete a client from the system, only users with permissions to delete clients can access this screen.
+ */
 class clsDeleteClientScreen :
 	protected clsScreen
 {

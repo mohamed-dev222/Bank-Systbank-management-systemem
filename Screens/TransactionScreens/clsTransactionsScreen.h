@@ -5,6 +5,12 @@
 #include "clsDepositScreen.h"
 #include "clsTotalBalancesScreen.h"
 #include <iomanip>
+/*
+    This screen will be used to display 
+	the transaction menu and handle user selections
+     for various transaction operations, only users with permissions
+	  to perform transactions can access this screen.
+*/
 class clsTransactionsScreen :
     protected clsScreen
 {

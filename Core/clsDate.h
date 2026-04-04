@@ -2,13 +2,16 @@
 #pragma once
 #include <vector>
 #include "clsString.h"
-
+// The stDate structure is used to store the day, month, and year components of a date.
 struct stDate
 {
 	int Day;
 	int Month;
 	int Year;
 };
+/*
+	The clsDate class provides various functionalities for handling dates, including constructors for different date formats, methods for validating dates, comparing dates, and formatting dates as strings. It also includes static methods for determining leap years, the number of days in a month, and the day of the week for a given date.
+*/
 class clsDate
 {
 private:

@@ -7,6 +7,9 @@
 #include <fstream>
 
 using namespace std;
+/*
+    This class represents a user in the system, it inherits from clsPerson and contains additional information related to the user's account, such as username, password, and permissions. It also includes methods for loading and saving user data to a file, as well as methods for updating and adding new users.
+*/
 class clsUser : public clsPerson
 {
 private:

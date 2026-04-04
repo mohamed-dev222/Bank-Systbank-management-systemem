@@ -2,7 +2,9 @@
 #include <iostream>
 #include "../GLobal.h"
 using namespace std;
-
+/*
+    This is the base class for all screens in the application, providing common functionality for drawing screen headers and menu options.
+*/
 class clsScreen
 {
 protected:

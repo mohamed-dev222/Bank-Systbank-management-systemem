@@ -6,7 +6,9 @@
 #include <iomanip>
 #include "clsMaineScreen.h"
 #include "../Global.h"
-
+/*
+    This screen will be used to handle user login functionality, allowing users to enter their credentials and access the system based on their permissions.
+*/
 class clsLoginScreen :protected clsScreen
 {
 

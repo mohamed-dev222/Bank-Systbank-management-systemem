@@ -5,7 +5,9 @@
 #include "../../Models/clsScreen.h"
 #include "../../Models/clsBankClient.h"
 using namespace std;
-
+    /*
+    This screen will be used to display a list of all clients in the system, only users with permissions to view client lists can access this screen.
+    */
 class clsClientListScreen : protected clsScreen
 {
 private:

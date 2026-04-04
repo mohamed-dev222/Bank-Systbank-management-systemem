@@ -4,7 +4,9 @@
 #include "../../Models/clsBankClient.h"
 #include "../../Core/clsUtil.h"
 #include <iomanip>
-
+/*
+    This screen will be used to display the total balances of all clients in the system, only users with permissions to view total balances can access this screen.
+*/
 class clsTotalBalancesScreen : protected clsScreen
 {
 

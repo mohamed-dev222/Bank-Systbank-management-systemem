@@ -4,7 +4,9 @@
 #include "../../Core/clsPerson.h"
 #include "../../Models/clsUser.h"
 #include "../../Core/clsInputValidate.h"
-
+/*
+    This screen will be used to delete existing users from the system, only users with permissions to manage users can access this screen.
+*/
 class clsDeleteUserScreen :protected clsScreen
 {
 

@@ -1,0 +1,3 @@
+C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build/CMakeFiles/app.dir
+C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build/CMakeFiles/edit_cache.dir
+C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build/CMakeFiles/rebuild_cache.dir

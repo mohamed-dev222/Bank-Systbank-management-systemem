@@ -1,0 +1,8 @@
+[
+{
+  "directory": "C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -IC:/Users/moham/Desktop/Bank-Systbank-management-systemem/Core -IC:/Users/moham/Desktop/Bank-Systbank-management-systemem/Models -IC:/Users/moham/Desktop/Bank-Systbank-management-systemem/Screens -IC:/Users/moham/Desktop/Bank-Systbank-management-systemem/UI -g -o CMakeFiles\\app.dir\\Main.cpp.obj -c C:\\Users\\moham\\Desktop\\Bank-Systbank-management-systemem\\Main.cpp",
+  "file": "C:/Users/moham/Desktop/Bank-Systbank-management-systemem/Main.cpp",
+  "output": "C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build/CMakeFiles/app.dir/Main.cpp.obj"
+}
+]

@@ -15,7 +15,7 @@ private:
     static void _PrintClientRecordBalanceLine(clsBankClient Client)
     {
 
-        cout << "\t| " << setw(14) << left << Client.AccountNumber();
+        cout << "\t\t\t| " << setw(14) << left << Client.AccountNumber();
         cout << "| " << setw(29) << left << Client.FullName();
         cout << "| " << setw(8) << left << Client.getAccountBalance() << "|" << endl;
 
@@ -26,16 +26,18 @@ public:
     static void ShowTotalBalances()
     {
         vector <clsBankClient> vClients = clsBankClient::GetClientsList();
-        cout << "\n\t\t\tBalance List (" << vClients.size() << ") Clients.\n\n";
-        cout << "\t+---------------+------------------------------+---------+\n";
+        _DrawScreenHeader("    Total Balances Screen");
+        _DrawUserAndDate(CurrentUser.GetUserName());
+        cout << "\n\t\t\t\t\tBalance List (" << vClients.size() << ") Clients.\n\n";
+        cout << "\t\t\t+---------------+------------------------------+---------+\n";
         cout << left;
-        cout << "\t|" << setw(15) << "Account Number" << "|";
+        cout << "\t\t\t|" << setw(15) << "Account Number" << "|";
         cout << setw(30) << "Client Name" << "|";
         cout << setw(9) << "Balance" << "|\n";
-        cout << "\t+---------------+------------------------------+---------+\n";
+        cout << "\t\t\t+---------------+------------------------------+---------+\n";
         if (vClients.size() == 0)
         {
-            cout << "\t\t\t\tNo Clients Available In the System!";
+            cout << "\t\t\t\t\t\tNo Clients Available In the System!";
         }
         else
         {
@@ -44,11 +46,11 @@ public:
                 _PrintClientRecordBalanceLine(C);
             }
         }
-        cout << "\t+---------------+------------------------------+---------+\n";
+        cout << "\t\t\t+---------------+------------------------------+---------+\n";
      
         double TotalBalances = clsBankClient::GetTotalBalances();
-        cout << "\t"<< setw(8) << left << "" << "Total Balances = " << TotalBalances << endl;
-        cout << "\t    "<< setw(8) << left << "" << "( " << to_string(TotalBalances )<< " )";
+        cout << "\t\t\t"<< setw(8) << left << "" << "Total Balances = " << TotalBalances << endl;
+        cout << "\t\t\t"<< setw(8) << left << "" << "( " << to_string(TotalBalances )<< " )";
     }
 
     };

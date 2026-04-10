@@ -42,7 +42,7 @@ public:
     static void ShowWithdrawScreen()
     {
         _DrawScreenHeader("\t   Withdraw Screen");
-
+        _DrawUserAndDate(CurrentUser.GetUserName());
         string AccountNumber = _ReadAccountNumber();
 
 

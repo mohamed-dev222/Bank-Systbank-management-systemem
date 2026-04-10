@@ -40,7 +40,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "app::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-app-Debug-b7d2358d34a737d1fd54.json",
+					"jsonFile" : "target-app-Debug-2f6c8d1c94ef4845fb17.json",
 					"name" : "app",
 					"projectIndex" : 0
 				}
@@ -50,8 +50,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/moham/Desktop/Bank-Systbank-management-systemem/build",
-		"source" : "C:/Users/moham/Desktop/Bank-Systbank-management-systemem"
+		"build" : "C:/Users/moham/Desktop/New folder/Bank-Systbank-management-systemem/build",
+		"source" : "C:/Users/moham/Desktop/New folder/Bank-Systbank-management-systemem"
 	},
 	"version" : 
 	{

@@ -2,6 +2,8 @@
 #pragma once
 #include <vector>
 #include "clsString.h"
+#include <string>
+using namespace std;
 // The stDate structure is used to store the day, month, and year components of a date.
 struct stDate
 {
@@ -15,21 +17,21 @@ struct stDate
 class clsDate
 {
 private:
-	
 	stDate _Date;
+
 public:
 	clsDate()
 	{
 		time_t t = time(0);
-		tm* now = localtime(&t);
+		tm *now = localtime(&t);
 		_Date.Day = now->tm_mday;
-		_Date.Month = now->tm_mon +1;
+		_Date.Month = now->tm_mon + 1;
 		_Date.Year = now->tm_year + 1900;
 	}
 	clsDate(string Date)
 	{
 		// 2/2/2000
-		vector<string> vDate = clsString::Split(Date,"/");
+		vector<string> vDate = clsString::Split(Date, "/");
 		_Date.Day = stoi(vDate.at(0));
 		_Date.Month = stoi(vDate.at(1));
 		_Date.Year = stoi(vDate.at(2));
@@ -46,9 +48,9 @@ public:
 	}
 	void SetDate(stDate Date)
 	{
-		_Date.Day   = Date.Day;
+		_Date.Day = Date.Day;
 		_Date.Month = Date.Month;
-		_Date.Year  = Date.Year;
+		_Date.Year = Date.Year;
 	}
 	stDate GetDate()
 	{
@@ -68,7 +70,6 @@ public:
 		vDate.push_back(to_string(sDate.Year));
 		string strDate = clsString::JoinString(vDate, "/");
 		return strDate;
-
 	}
 	string DateToString()
 	{
@@ -85,11 +86,14 @@ public:
 	}
 	static bool IsDate1BeforeDate2(clsDate Date1, clsDate Date2)
 	{
-		if (Date1._Date.Year < Date2._Date.Year) return true;
-		else if (Date1._Date.Month < Date2._Date.Month) return true;
-		else if (Date1._Date.Day < Date2._Date.Day) return true;
-		else return false;
-
+		if (Date1._Date.Year < Date2._Date.Year)
+			return true;
+		else if (Date1._Date.Month < Date2._Date.Month)
+			return true;
+		else if (Date1._Date.Day < Date2._Date.Day)
+			return true;
+		else
+			return false;
 	}
 	bool IsDateBeforeDate2(clsDate Date2)
 	{
@@ -98,8 +102,8 @@ public:
 	static bool IsDate1EqualDate2(clsDate Date1, clsDate Date2)
 	{
 		return (Date1._Date.Day == Date2._Date.Day &&
-			Date1._Date.Month == Date2._Date.Month &&
-			Date1._Date.Year == Date2._Date.Year);
+				Date1._Date.Month == Date2._Date.Month &&
+				Date1._Date.Year == Date2._Date.Year);
 	}
 	bool IsDateEqualDate2(clsDate Date2)
 	{
@@ -119,7 +123,8 @@ public:
 	}
 	static bool IsDate1AfterDate2(clsDate Date1, clsDate Date2)
 	{
-		return IsDate1BeforeDate2(Date1, Date2) ? false : IsDate1EqualDate2(Date1, Date2) ? false : true;
+		return IsDate1BeforeDate2(Date1, Date2) ? false : IsDate1EqualDate2(Date1, Date2) ? false
+																						  : true;
 	}
 	bool IsDateAfterDate2(clsDate Date2)
 	{
@@ -127,8 +132,10 @@ public:
 	}
 	static bool IsValidDate(clsDate Date)
 	{
-		if (Date._Date.Day > NumberOfDaysInAMonth(Date._Date.Month, Date._Date.Year) || Date._Date.Day < 0) return false;
-		else if (Date._Date.Month > 12 || Date._Date.Month < 1) return false;
+		if (Date._Date.Day > NumberOfDaysInAMonth(Date._Date.Month, Date._Date.Year) || Date._Date.Day < 0)
+			return false;
+		else if (Date._Date.Month > 12 || Date._Date.Month < 1)
+			return false;
 		return true;
 	}
 	bool IsValid()
@@ -162,8 +169,9 @@ public:
 
 	static short NumberOfDaysInAMonth(short Month, short Year)
 	{
-		if (Month > 12 || Month < 1) return 0;
-		short MonthDay[12] = { (short)31, (isLeapYear(Year) ? (short)29 : (short)28), (short)31, (short)30, (short)31, (short)30, (short)31, (short)31, (short)30, (short)31, (short)30, (short)31 };
+		if (Month > 12 || Month < 1)
+			return 0;
+		short MonthDay[12] = {(short)31, (isLeapYear(Year) ? (short)29 : (short)28), (short)31, (short)30, (short)31, (short)30, (short)31, (short)31, (short)30, (short)31, (short)30, (short)31};
 		return MonthDay[Month - 1];
 	}
 	short NumberOfDaysInAMonth()
@@ -188,11 +196,11 @@ public:
 	}
 	static int NumberOfSecondsInAMonth(short Month, short Year)
 	{
-		return  NumberOfMinutesInAMonth(Month, Year) * 60;
+		return NumberOfMinutesInAMonth(Month, Year) * 60;
 	}
 	int NumberOfSecondsInAMonth()
 	{
-		return  NumberOfSecondsInAMonth(_Date.Month, _Date.Year);
+		return NumberOfSecondsInAMonth(_Date.Month, _Date.Year);
 	}
 	static short NumberOfDaysInAYear(short Year)
 	{
@@ -220,7 +228,7 @@ public:
 	}
 	static int NumberOfSecondsInAYear(short Year)
 	{
-		return NumberOfMinutesInAYear(Year)*60;
+		return NumberOfMinutesInAYear(Year) * 60;
 	}
 	int NumberOfSecondsInAYear()
 	{
@@ -240,12 +248,12 @@ public:
 	}
 	static string DayShortName(short DayWeekOrder)
 	{
-		string DayOfWeek[7] = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+		string DayOfWeek[7] = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
 
-		if (DayWeekOrder < 0 || DayWeekOrder > 6)  
+		if (DayWeekOrder < 0 || DayWeekOrder > 6)
 			return "Invalid Day";
 
-		return DayOfWeek[DayWeekOrder];  
+		return DayOfWeek[DayWeekOrder];
 	}
 	string DayShortName()
 	{
@@ -257,23 +265,24 @@ public:
 			return "Invalid Month!";
 
 		string Months[12] =
-		{ "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-		 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+			{"Jan", "Feb", "Mar", "Apr", "May", "Jun",
+			 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
 		return Months[MonthNumber - 1];
 	}
 	string MonthShortName()
 	{
 		return MonthShortName(_Date.Month);
-	}	
+	}
 
 	static void PrintMonthCalendar(stDate Date)
 	{
 		printf("  _______________%s_______________\n\n", MonthShortName(Date.Month).c_str());
 		printf("  Sun  Mon  Tue  Wed  Thu  Fri  Sat\n");
 		int i;
-		 
-		for (i = 0; i < DayOfWeekOrder(Date); i++) printf("     ");
+
+		for (i = 0; i < DayOfWeekOrder(Date); i++)
+			printf("     ");
 
 		for (int j = 1; j <= NumberOfDaysInAMonth(Date.Month, Date.Year); j++)
 		{
@@ -285,8 +294,6 @@ public:
 			}
 		}
 		printf("\n  _________________________________\n");
-
-
 	}
 	void PrintMonthCalendar()
 	{
@@ -302,7 +309,6 @@ public:
 			Date.Month = i;
 			PrintMonthCalendar(Date);
 		}
-	
 	}
 	void PrintYearCalendar()
 	{
@@ -312,7 +318,8 @@ public:
 	static int DaysFromBeginningOfYear(stDate Date)
 	{
 		int Sum = 0;
-		for (int i = 1; i < Date.Month; i++) Sum += NumberOfDaysInAMonth(i, Date.Year);
+		for (int i = 1; i < Date.Month; i++)
+			Sum += NumberOfDaysInAMonth(i, Date.Year);
 		Sum += Date.Day;
 		return Sum;
 	}
@@ -379,14 +386,14 @@ public:
 
 			DateFrom = AddOneDay(DateFrom);
 		}
-		//to add weekends 
+		// to add weekends
 		for (short i = 1; i <= WeekEndCounter; i++)
 			DateFrom = AddOneDay(DateFrom);
 
 		return DateFrom;
 	}
 
-	static void SwapDates(clsDate& Date1, clsDate& Date2)
+	static void SwapDates(clsDate &Date1, clsDate &Date2)
 	{
 		clsDate var = Date1;
 		Date1 = Date2;
@@ -432,12 +439,20 @@ public:
 		*this = AddOneDay(*this);
 	}
 
-	enum enDateCompare { Before = -1, Equal = 0, After = 1 };
+	enum enDateCompare
+	{
+		Before = -1,
+		Equal = 0,
+		After = 1
+	};
 	static enDateCompare CompareDates(clsDate Date1, clsDate Date2)
 	{
-		if (IsDate1AfterDate2(Date1, Date2)) return enDateCompare::After;
-		else if (IsDate1BeforeDate2(Date1, Date2)) return enDateCompare::Before;
-		else return enDateCompare::Equal;
+		if (IsDate1AfterDate2(Date1, Date2))
+			return enDateCompare::After;
+		else if (IsDate1BeforeDate2(Date1, Date2))
+			return enDateCompare::Before;
+		else
+			return enDateCompare::Equal;
 	}
 	enDateCompare CompareDates(clsDate Date2)
 	{
@@ -499,9 +514,8 @@ public:
 	{
 		return clsDate();
 	}
-	
-	
-	static clsDate IncreaseDateByOneWeek(clsDate& Date)
+
+	static clsDate IncreaseDateByOneWeek(clsDate &Date)
 	{
 		for (size_t i = 0; i < 7; i++)
 		{
@@ -513,23 +527,25 @@ public:
 	{
 		*this = IncreaseDateByOneWeek(*this);
 	}
-	static clsDate IncreaseDateByXWeeks(short Weeks, clsDate& Date)
+	static clsDate IncreaseDateByXWeeks(short Weeks, clsDate &Date)
 	{
-		for (size_t i = 0; i < Weeks; i++) IncreaseDateByOneWeek(Date);
+		for (size_t i = 0; i < Weeks; i++)
+			IncreaseDateByOneWeek(Date);
 		return Date;
 	}
 	void IncreaseDateByXWeeks(short Weeks)
 	{
 		*this = IncreaseDateByXWeeks(Weeks, *this);
 	}
-	static clsDate IncreaseDateByOneMonth(clsDate& Date)
+	static clsDate IncreaseDateByOneMonth(clsDate &Date)
 	{
 		if (IsLastMonthInYear(Date._Date.Month))
 		{
 			Date._Date.Month = 1;
 			Date._Date.Year++;
 		}
-		else Date._Date.Month++;
+		else
+			Date._Date.Month++;
 		short DaysInMonth = NumberOfDaysInAMonth(Date._Date.Month, Date._Date.Year);
 		if (Date._Date.Day > DaysInMonth)
 		{
@@ -541,16 +557,17 @@ public:
 	{
 		*this = IncreaseDateByOneMonth(*this);
 	}
-	static clsDate IncreaseDateByXMonths(short Months, clsDate& Date)
+	static clsDate IncreaseDateByXMonths(short Months, clsDate &Date)
 	{
-		for (int i = 1; i <= Months; i++) IncreaseDateByOneMonth(Date);
+		for (int i = 1; i <= Months; i++)
+			IncreaseDateByOneMonth(Date);
 		return Date;
 	}
 	void IncreaseDateByXMonths(short Months)
 	{
 		*this = IncreaseDateByXMonths(Months, *this);
 	}
-	static clsDate IncreaseDateByOneYear(clsDate& Date)
+	static clsDate IncreaseDateByOneYear(clsDate &Date)
 	{
 		if (isLeapYear(Date._Date.Year) && Date._Date.Month == 2 && Date._Date.Day == 29)
 		{
@@ -568,7 +585,7 @@ public:
 	{
 		*this = IncreaseDateByOneYear(*this);
 	}
-	static clsDate IncreaseDateByXYear(short NumOfYears, clsDate& Date)
+	static clsDate IncreaseDateByXYear(short NumOfYears, clsDate &Date)
 	{
 		for (int i = 0; i < NumOfYears; i++)
 		{
@@ -580,24 +597,25 @@ public:
 	{
 		*this = IncreaseDateByXYear(NumOfYears, *this);
 	}
-	static clsDate IncreaseDateByOneDecade(clsDate& Date)
+	static clsDate IncreaseDateByOneDecade(clsDate &Date)
 	{
-		return IncreaseDateByXYear(10,Date);
+		return IncreaseDateByXYear(10, Date);
 	}
 	void IncreaseDateByOneDecade()
 	{
 		*this = IncreaseDateByOneDecade(*this);
 	}
-	static clsDate IncreaseDateByXDecades(short Decades, clsDate& Date)
+	static clsDate IncreaseDateByXDecades(short Decades, clsDate &Date)
 	{
-		for (int i = 0; i < Decades; i++) IncreaseDateByOneDecade(Date);
+		for (int i = 0; i < Decades; i++)
+			IncreaseDateByOneDecade(Date);
 		return Date;
 	}
 	void IncreaseDateByXDecades(short Decades)
 	{
 		*this = IncreaseDateByXDecades(Decades, *this);
 	}
-	static clsDate IncreaseDateByOneCentury(clsDate& Date)
+	static clsDate IncreaseDateByOneCentury(clsDate &Date)
 	{
 		return IncreaseDateByXDecades(10, Date);
 	}
@@ -605,7 +623,7 @@ public:
 	{
 		*this = IncreaseDateByOneCentury(*this);
 	}
-	static clsDate IncreaseDateByOneMillennium(clsDate& Date)
+	static clsDate IncreaseDateByOneMillennium(clsDate &Date)
 	{
 		return IncreaseDateByXDecades(100, Date);
 	}
@@ -630,15 +648,15 @@ public:
 				Date._Date.Day = NumberOfDaysInAMonth(Date._Date.Month, Date._Date.Year);
 			}
 		}
-		else Date._Date.Day--;
+		else
+			Date._Date.Day--;
 		return Date;
-
 	}
 	void DecreaseDateByOneDay()
 	{
 		*this = DecreaseDateByOneDay(*this);
 	}
-	static clsDate DecreaseDateByOneWeek(clsDate& Date)
+	static clsDate DecreaseDateByOneWeek(clsDate &Date)
 	{
 
 		for (int i = 1; i <= 7; i++)
@@ -652,7 +670,7 @@ public:
 	{
 		DecreaseDateByOneWeek(*this);
 	}
-	static clsDate DecreaseDateByXWeeks(short Weeks, clsDate& Date)
+	static clsDate DecreaseDateByXWeeks(short Weeks, clsDate &Date)
 	{
 
 		for (short i = 1; i <= Weeks; i++)
@@ -665,7 +683,7 @@ public:
 	{
 		DecreaseDateByXWeeks(Weeks, *this);
 	}
-	static clsDate DecreaseDateByOneMonth(clsDate& Date)
+	static clsDate DecreaseDateByOneMonth(clsDate &Date)
 	{
 
 		if (Date._Date.Month == 1)
@@ -676,16 +694,14 @@ public:
 		else
 			Date._Date.Month--;
 
-
-		//last check day in date should not exceed max days in the current month
-	   // example if date is 31/3/2022 decreasing one month should not be 31/2/2022, it should
-	   // be 28/2/2022
+		// last check day in date should not exceed max days in the current month
+		// example if date is 31/3/2022 decreasing one month should not be 31/2/2022, it should
+		// be 28/2/2022
 		short NumberOfDaysInCurrentMonth = NumberOfDaysInAMonth(Date._Date.Month, Date._Date.Year);
 		if (Date._Date.Day > NumberOfDaysInCurrentMonth)
 		{
 			Date._Date.Day = NumberOfDaysInCurrentMonth;
 		}
-
 
 		return Date;
 	}
@@ -693,7 +709,7 @@ public:
 	{
 		DecreaseDateByOneMonth(*this);
 	}
-	static clsDate DecreaseDateByXDays(short Days, clsDate& Date)
+	static clsDate DecreaseDateByXDays(short Days, clsDate &Date)
 	{
 
 		for (short i = 1; i <= Days; i++)
@@ -706,7 +722,7 @@ public:
 	{
 		DecreaseDateByXDays(Days, *this);
 	}
-	static clsDate DecreaseDateByXMonths(short Months, clsDate& Date)
+	static clsDate DecreaseDateByXMonths(short Months, clsDate &Date)
 	{
 
 		for (short i = 1; i <= Months; i++)
@@ -719,7 +735,7 @@ public:
 	{
 		DecreaseDateByXMonths(Months, *this);
 	}
-	static clsDate DecreaseDateByOneYear(clsDate& Date)
+	static clsDate DecreaseDateByOneYear(clsDate &Date)
 	{
 
 		Date._Date.Year--;
@@ -729,7 +745,7 @@ public:
 	{
 		DecreaseDateByOneYear(*this);
 	}
-	static clsDate DecreaseDateByXYears(short Years, clsDate& Date)
+	static clsDate DecreaseDateByXYears(short Years, clsDate &Date)
 	{
 
 		Date._Date.Year -= Years;
@@ -739,9 +755,9 @@ public:
 	{
 		DecreaseDateByXYears(Years, *this);
 	}
-	static clsDate DecreaseDateByOneDecade(clsDate& Date)
+	static clsDate DecreaseDateByOneDecade(clsDate &Date)
 	{
-		//Period of 10 years
+		// Period of 10 years
 		Date._Date.Year -= 10;
 		return Date;
 	}
@@ -749,7 +765,7 @@ public:
 	{
 		DecreaseDateByOneDecade(*this);
 	}
-	static clsDate DecreaseDateByXDecades(short Decades, clsDate& Date)
+	static clsDate DecreaseDateByXDecades(short Decades, clsDate &Date)
 	{
 
 		Date._Date.Year -= Decades * 10;
@@ -759,9 +775,9 @@ public:
 	{
 		DecreaseDateByXDecades(Decades, *this);
 	}
-	static clsDate DecreaseDateByOneCentury(clsDate& Date)
+	static clsDate DecreaseDateByOneCentury(clsDate &Date)
 	{
-		//Period of 100 years
+		// Period of 100 years
 		Date._Date.Year -= 100;
 		return Date;
 	}
@@ -769,14 +785,27 @@ public:
 	{
 		DecreaseDateByOneCentury(*this);
 	}
-	static clsDate DecreaseDateByOneMillennium(clsDate& Date)
+	static clsDate DecreaseDateByOneMillennium(clsDate &Date)
 	{
-		//Period of 1000 years
+		// Period of 1000 years
 		Date._Date.Year -= 1000;
 		return Date;
 	}
 	void DecreaseDateByOneMillennium()
 	{
 		DecreaseDateByOneMillennium(*this);
+	}
+	static string GetSystemDateTimeString()
+	{
+		int Year, Month, Day, Hour, Minute, Second;
+		time_t T = time(0);
+		tm* Now = localtime(&T);
+		Year = Now->tm_year + 1900;
+		Month = Now->tm_mon + 1;
+		Day = Now->tm_mday;
+		Hour = Now->tm_hour;
+		Minute = Now->tm_min;
+		Second = Now->tm_sec;
+		return to_string(Day) + "/" + to_string(Month) + "/" + to_string(Year) + " - " + to_string(Hour) + ":" + to_string(Minute) + ":" + to_string(Second);
 	}
 };

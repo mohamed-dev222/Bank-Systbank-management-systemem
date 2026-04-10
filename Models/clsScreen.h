@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "../GLobal.h"
+#include "../Core/clsDate.h"
 using namespace std;
 /*
     This is the base class for all screens in the application, providing common functionality for drawing screen headers and menu options.
@@ -23,8 +24,16 @@ protected:
         {
             cout << "\n\t\t\t\t\t\t"<< SubTitle;
         }
-        cout << "\n\t\t\t\t    ______________________________________\n\n";
+        cout << "\n\t\t\t\t    ______________________________________\n";
 	}
+    static void _DrawUserAndDate(string UserName = "")
+    {
+        cout << "\t\t\t\t\tUser: " << UserName<<endl;
+        cout << "\t\t\t\t\t";
+        clsDate::GetSystemDate().PrintDate();
+        cout << "\n";
+    }
+	
     static bool CheckAccessRights(clsUser::enPermissions Permission)
     {
 

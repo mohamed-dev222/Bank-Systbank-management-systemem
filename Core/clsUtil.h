@@ -137,7 +137,8 @@ using namespace std;
 			}
 			return t;
 		}
-		static string EncryptText(string Text, short EncryptionKey)
+		
+		static string EncryptText(string Text, short EncryptionKey= 2)
 		{
 			for (int i = 0; i < Text.length(); i++)
 			{
@@ -145,7 +146,7 @@ using namespace std;
 			}
 			return Text;
 		}
-		static string DecryptText(string Text, short EncryptionKey)
+		static string DecryptText(string Text, short EncryptionKey = 2)
 		{
 			for (int i = 0; i < Text.length(); i++)
 			{

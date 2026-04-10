@@ -67,6 +67,7 @@ public:
 			return;// this will exit the function and it will not continue
 		}
 		_DrawScreenHeader("    Delete Client Screen.");
+		_DrawUserAndDate(CurrentUser.GetUserName());
 		_DeleteClient();
 	}
 

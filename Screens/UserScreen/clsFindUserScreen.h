@@ -33,7 +33,7 @@ public:
     {
 
         _DrawScreenHeader("\t  Find User Screen");
-
+        _DrawUserAndDate(CurrentUser.GetUserName());
         string UserName;
         UserName = clsInputValidate::ReadString("\nPlease Enter UserName: ");
         while (!clsUser::IsUserExist(UserName))

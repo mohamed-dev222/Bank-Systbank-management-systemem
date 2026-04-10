@@ -14,17 +14,24 @@ class clsLoginScreen :protected clsScreen
 
 private:
 
-    static  void _Login()
+    static  bool _Login()
     {
         bool LoginFaild = false;
-
+        short FaildLoginCount = 3;
         string Username, Password;
         do
         {
 
             if (LoginFaild)
             {
-                cout << "\nInvlaid Username/Password!\n\n";
+                FaildLoginCount--;
+                cout << "\nInvlaid Username/Password!\n";
+                cout << "You Have " << FaildLoginCount << " Trials to Login.\n\n";
+            }
+            if (FaildLoginCount == 0)
+            {
+                cout << "\nYou have exceeded the maximum number of login attempts. Exiting the program.\n";
+                return false;
             }
 
             cout << "Enter Username? ";
@@ -36,21 +43,25 @@ private:
             CurrentUser = clsUser::Find(Username, Password);
 
             LoginFaild = CurrentUser.IsEmpty();
+            
 
-        } while (LoginFaild);
-
+        } while (LoginFaild && FaildLoginCount > 0);
+        CurrentUser.RegisterLogin();
         clsMaineScreen::ShowMainMenue();
+        return true;
 
     }
 
 public:
 
 
-    static void ShowLoginScreen()
+    static bool ShowLoginScreen()
     {
         system("cls");
         _DrawScreenHeader("\t  Login Screen");
-        _Login();
+        _DrawUserAndDate();
+        return _Login();
+        
 
     }
 

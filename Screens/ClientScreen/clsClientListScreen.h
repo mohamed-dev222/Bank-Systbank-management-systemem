@@ -32,6 +32,7 @@ public:
 
         vector <clsBankClient> vClients = clsBankClient::GetClientsList();
         _DrawScreenHeader("       Clients List Screen","  (" + to_string(vClients.size()) + ") Clint(s).");
+        _DrawUserAndDate(CurrentUser.GetUserName());
         cout << "\t+--------------+---------------------+--------------+-------------------+---------+---------+\n";
         cout << left;
         cout << "\t|" << setw(14) << "Account Number" << "|";

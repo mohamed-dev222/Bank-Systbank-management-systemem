@@ -32,6 +32,7 @@ public:
     {
 
         _DrawScreenHeader("\tDelete User Screen");
+        _DrawUserAndDate(CurrentUser.GetUserName());
 
         string UserName = "";
 

@@ -9,15 +9,16 @@ using namespace std;
  */
 int main()
 {
-    char Answer = 'n';
-    cout << "Do you want to log in?Y/N?  ";
-    cin >> Answer;
-    while ((Answer == 'Y') || (Answer == 'y'))
+    
+    while ((true))
     {
-        clsLoginScreen::ShowLoginScreen();
-        cout << "Do you want to log in again?Y/N? ";
-        cin >> Answer;
+        if(!clsLoginScreen::ShowLoginScreen())
+        {
+            break;
+        }
+        
     }
+    system("pause>0");
     
     return 0;
 }

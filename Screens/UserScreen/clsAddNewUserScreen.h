@@ -106,6 +106,13 @@ private:
         {
             Permissions += clsUser::enPermissions::pManageUsers;
         }
+        cout << "\nLogin Register? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions += clsUser::enPermissions::pLoginRegister;
+        }
+
 
         return Permissions;
 
@@ -117,7 +124,7 @@ public:
     {
 
         _DrawScreenHeader("\t  Add New User Screen");
-
+        _DrawUserAndDate(CurrentUser.GetUserName());
         string UserName = "";
         UserName = clsInputValidate::ReadString("\nPlease Enter UserName: ");
         while (clsUser::IsUserExist(UserName))

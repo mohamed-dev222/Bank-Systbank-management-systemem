@@ -13,6 +13,17 @@ struct stAccountDate
 	string PinCode;
 	float AccountBalance;
 };
+struct stTrnsferLogRecord
+    {
+        string DateTime;
+        string SourceAccountNumber;
+        string DestinationAccountNumber;
+        float Amount;
+        float srcBalanceAfter;
+        float destBalanceAfter;
+        string UserName;
+
+    };
 // The clsBankClient class represents a bank client in the system, it inherits from clsPerson and contains additional information related to the client's bank account, such as account number, pin code, and account balance. It also includes methods for loading and saving client data to a file, as well as methods for updating and adding new clients.
 class clsBankClient : public clsPerson
 {
@@ -123,6 +134,50 @@ private:
 		}
 
 	}
+	string _PrepareTransferLogRecord(float Amount,clsBankClient DestinationClient,
+                                     string UserName, string Seperator = "#//#")
+    {
+        string TransferLogRecord = "";
+        TransferLogRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        TransferLogRecord += AccountNumber() + Seperator;
+        TransferLogRecord += DestinationClient.AccountNumber() + Seperator;
+        TransferLogRecord += to_string(Amount) + Seperator;
+        TransferLogRecord += to_string(_Account.AccountBalance) + Seperator;
+        TransferLogRecord += to_string(DestinationClient._Account.AccountBalance) + Seperator;
+        TransferLogRecord += UserName;
+        return TransferLogRecord;
+    }
+	void _RegisterTransferLog(double Amount, clsBankClient &DestinationClient, string UserName)
+	{
+        string stDataLine = _PrepareTransferLogRecord( Amount,  DestinationClient,  UserName);
+
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::out | ios::app);
+
+        if (MyFile.is_open())
+        {
+
+            MyFile << stDataLine << endl;
+
+            MyFile.close();
+        }
+	}
+	static stTrnsferLogRecord _ConvertTransferLogLineToRecord(string Line, string Seperator = "#//#")
+    {
+        stTrnsferLogRecord TrnsferLogRecord;
+
+        vector <string> vTrnsferLogRecordLine = clsString::Split(Line, Seperator);
+        TrnsferLogRecord.DateTime = vTrnsferLogRecordLine[0];
+        TrnsferLogRecord.SourceAccountNumber = vTrnsferLogRecordLine[1];
+        TrnsferLogRecord.DestinationAccountNumber = vTrnsferLogRecordLine[2];
+        TrnsferLogRecord.Amount = stod(vTrnsferLogRecordLine[3]);
+        TrnsferLogRecord.srcBalanceAfter = stod(vTrnsferLogRecordLine[4]);
+        TrnsferLogRecord.destBalanceAfter = stod(vTrnsferLogRecordLine[5]);
+        TrnsferLogRecord.UserName = vTrnsferLogRecordLine[6];
+
+        return TrnsferLogRecord;
+
+    }
 public:
 	bool MarkedForDeleted()
 	{
@@ -349,4 +404,50 @@ public:
 
 		return TotalBalances;
 	}
+	bool Transfer(double Amount, clsBankClient &ToClient, string UserName)
+	{
+		if (Amount > _Account.AccountBalance)
+		{
+			
+			return false;
+		}
+		else
+		{
+			this->Withdraw(Amount);
+			ToClient.Deposit(Amount);
+			_RegisterTransferLog(Amount,ToClient,UserName);
+			return true;
+		}
+
+	}
+	static  vector <stTrnsferLogRecord> GetTransfersLogList()
+    {
+        vector <stTrnsferLogRecord> vTransferLogRecord;
+
+        fstream MyFile;
+        MyFile.open("TransferLog.txt", ios::in);//read Mode
+
+        if (MyFile.is_open())
+        {
+
+            string Line;
+
+            stTrnsferLogRecord TransferRecord;
+
+            while (getline(MyFile, Line))
+            {
+
+                TransferRecord = _ConvertTransferLogLineToRecord(Line);
+
+                vTransferLogRecord.push_back(TransferRecord);
+
+            }
+
+            MyFile.close();
+
+        }
+
+        return vTransferLogRecord;
+
+    }
 };

@@ -11,7 +11,7 @@ class clsDepositScreen : protected clsScreen
 {
 
 private:
-    static void _PrintClient(clsBankClient& Client)
+    static void _PrintClient(clsBankClient &Client)
     {
 
         cout << "\nClient Card:";
@@ -35,15 +35,12 @@ private:
         return AccountNumber;
     }
 
-
 public:
-
     static void ShowDepositScreen()
     {
         _DrawScreenHeader("\t   Deposit Screen");
-
+        _DrawUserAndDate(CurrentUser.GetUserName());
         string AccountNumber = _ReadAccountNumber();
-
 
         while (!clsBankClient::isClientExist(AccountNumber))
         {
@@ -67,14 +64,10 @@ public:
             Client1.Deposit(Amount);
             cout << "\nAmount Deposited Successfully.\n";
             cout << "\nNew Balance Is: " << Client1.getAccountBalance();
-
         }
         else
         {
             cout << "\nOperation was cancelled.\n";
         }
-
     }
-
 };
-

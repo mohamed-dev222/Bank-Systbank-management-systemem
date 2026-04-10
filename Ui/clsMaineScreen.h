@@ -10,6 +10,7 @@
 #include "../Screens/TransactionScreens/clsTransactionsScreen.h"
 #include "../Screens/UserScreen/clsManageUsersScreen.h"
 #include "../Global.h"
+#include "../Screens/LogScreen/clsLoginRegisterScreen.h"
 /*
     This screen will be used as the main entry point for the application, providing access to all available features based on the user's permissions.
 */
@@ -19,7 +20,7 @@ private:
 	enum enMainMenueOptions {
 		eListClients = 1, eAddNewClient = 2, eDeleteClient = 3,
 		eUpdateClient = 4, eFindClient = 5, eShowTransactionsMenue = 6,
-		eManageUsers = 7, eExit = 8
+		eManageUsers = 7, eLoginRegister = 8, eExit = 9
 	};
 	static void _GoBackToMainMenue()
 	{
@@ -69,6 +70,10 @@ private:
 		clsManageUsersScreen::ShowManageUsersMenue();
 
 	}
+	static void _ShowLoginRegisterScreen()
+	{
+		clsLoginRegisterScreen::ShowLoginRegisterScreen();
+	}
 
 	static void _Logout()
 	{
@@ -79,7 +84,7 @@ private:
 	static short _ReadMainMenueOption(string Text)
 	{
 		cout << "\t\t\t\t " << Text;
-		short Choose = clsInputValidate::ReadIntNumberBetween(1,8);
+		short Choose = clsInputValidate::ReadIntNumberBetween(1,9);
 		return Choose;
 	}
 	static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
@@ -125,14 +130,21 @@ private:
 		{
 			system("cls");
 			_ShowTransactionsMenue();
-			_GoBackToMainMenue2();
+			_GoBackToMainMenue();
 			break;
 		};
 		case enMainMenueOptions::eManageUsers:
 		{
 			system("cls");
 			_ShowManageUsersMenue();
-			_GoBackToMainMenue2();
+			_GoBackToMainMenue();
+			break;
+		};
+		case enMainMenueOptions::eLoginRegister:
+		{
+			system("cls");
+			_ShowLoginRegisterScreen();
+			_GoBackToMainMenue();
 			break;
 		};
 		case enMainMenueOptions::eExit:
@@ -150,13 +162,14 @@ public:
 		system("cls");
 		cout << left;
 		_DrawScreenHeader("\tMain Screen");
+		_DrawUserAndDate(CurrentUser.GetUserName());
 		cout << "\t\t\t\t ============================================";
 		cout << "\n\t\t\t\t\t\t" << setw(25) << "Main Menue";
 		cout << "\n\t\t\t\t ============================================\n";
-		string Text[8] = { "Show Client List.", "Add New Client.", "Delete Client.", "Update Client Info.", "Find Client.", "Transaction.", "Manage Users.", "Logout." };
-		_MenuOptionsScreen(8, Text);
+		string Text[9] = { "Show Client List.", "Add New Client.", "Delete Client.", "Update Client Info.", "Find Client.", "Transaction.", "Manage Users.","Login Register.", "Logout." };
+		_MenuOptionsScreen(9, Text);
 		cout << "\t\t\t\t ============================================\n";
-		_PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption("Choose What Do You Want To Do? [1 to 8]? "));
+		_PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption("Choose What Do You Want To Do? [1 to 9]? "));
 
 	}
 };

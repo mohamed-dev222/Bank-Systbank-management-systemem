@@ -132,6 +132,7 @@ public:
             return;// this will exit the function and it will not continue
         }
         _DrawScreenHeader("\tManage Users Screen");
+        _DrawUserAndDate(CurrentUser.GetUserName());
 
         cout << "\t\t\t\t ============================================";
         cout << "\n\t\t\t\t\t\t" << setw(25) << "Manage Users Menue";

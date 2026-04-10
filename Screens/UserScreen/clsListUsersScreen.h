@@ -25,6 +25,7 @@ public:
     {
         vector <clsUser> vClients = clsUser::GetUsersList();
         _DrawScreenHeader("       User List Screen", "  (" + to_string(vClients.size()) + ") User(s).");
+        _DrawUserAndDate(CurrentUser.GetUserName());
         cout << "\t+--------------+---------------------+--------------+-------------------+---------+-----------+\n";
         cout << left;
         cout << "\t|" << setw(14) << "Account Number" << "|";

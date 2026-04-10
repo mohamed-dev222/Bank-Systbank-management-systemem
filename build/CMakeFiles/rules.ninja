@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = C:\msys64\ucrt64\bin\cmake.exe --regenerate-during-build -SC:\Users\moham\Desktop\Bank-Systbank-management-systemem -BC:\Users\moham\Desktop\Bank-Systbank-management-systemem\build
+  command = C:\msys64\ucrt64\bin\cmake.exe --regenerate-during-build -S"C:\Users\moham\Desktop\New folder\Bank-Systbank-management-systemem" -B"C:\Users\moham\Desktop\New folder\Bank-Systbank-management-systemem\build"
   description = Re-running CMake...
   generator = 1
 

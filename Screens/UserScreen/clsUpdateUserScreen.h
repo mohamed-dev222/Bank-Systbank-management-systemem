@@ -117,7 +117,8 @@ public:
     {
 
         _DrawScreenHeader("\tUpdate User Screen");
-
+        _DrawUserAndDate(CurrentUser.GetUserName());
+        
         string UserName = "";
 
         UserName = clsInputValidate::ReadString("\nPlease Enter User UserName: ");

@@ -34,6 +34,7 @@ public:
 			return;// this will exit the function and it will not continue
 		}
 		_DrawScreenHeader("    Find Client Screen");
+		_DrawUserAndDate(CurrentUser.GetUserName());
 		string AccountNumber = clsInputValidate::ReadString("Please Enter Account Number: ");
 		while (!(clsBankClient::isClientExist(AccountNumber)))
 		{

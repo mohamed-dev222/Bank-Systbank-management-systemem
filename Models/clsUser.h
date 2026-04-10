@@ -1,8 +1,10 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "../Core/clsDate.h"
 #include "../Core/clsPerson.h"
 #include "../Core/clsString.h"
+#include "../Core/clsUtil.h"
 #include <vector>
 #include <fstream>
 
@@ -10,11 +12,23 @@ using namespace std;
 /*
     This class represents a user in the system, it inherits from clsPerson and contains additional information related to the user's account, such as username, password, and permissions. It also includes methods for loading and saving user data to a file, as well as methods for updating and adding new users.
 */
+struct stLogRegisterRecord
+{
+    string DateTime;
+    string UserName;
+    string Password;
+    int Permissions;
+};
+
 class clsUser : public clsPerson
 {
 private:
-
-    enum enMode { EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 };
+    enum enMode
+    {
+        EmptyMode = 0,
+        UpdateMode = 1,
+        AddNewMode = 2
+    };
     enMode _Mode;
     string _UserName;
     string _Password;
@@ -27,9 +41,16 @@ private:
         vector<string> vUserData;
         vUserData = clsString::Split(Line, Seperator);
 
-        return clsUser(enMode::UpdateMode, vUserData[0], vUserData[1], vUserData[2],
-            vUserData[3], vUserData[4], vUserData[5], stoi(vUserData[6]));
+        if (vUserData.size() < 7)
+        {
+            return _GetEmptyUserObject();
+        }
 
+        return clsUser(enMode::UpdateMode,
+                       vUserData[0], vUserData[1], vUserData[2],
+                       vUserData[3], vUserData[4],
+                       clsUtil::DecryptText(vUserData[5]),
+                       stoi(vUserData[6]));
     }
 
     static string _ConverUserObjectToLine(clsUser User, string Seperator = "#//#")
@@ -41,48 +62,45 @@ private:
         UserRecord += User.getEmail() + Seperator;
         UserRecord += User.getPhone() + Seperator;
         UserRecord += User.GetUserName() + Seperator;
-        UserRecord += User.GetPassword() + Seperator;
+        UserRecord += clsUtil::EncryptText(User.GetPassword()) + Seperator;
         UserRecord += to_string(User.GetPermissions());
 
         return UserRecord;
-
     }
 
-    static  vector <clsUser> _LoadUsersDataFromFile()
+    static vector<clsUser> _LoadUsersDataFromFile()
     {
 
-        vector <clsUser> vUsers;
+        vector<clsUser> vUsers;
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("Users.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
 
             string Line;
 
-
             while (getline(MyFile, Line))
             {
-
+                if (Line.empty())
+                    continue;
                 clsUser User = _ConvertLinetoUserObject(Line);
-
-                vUsers.push_back(User);
+                if (!User.IsEmpty())
+                    vUsers.push_back(User);
             }
 
             MyFile.close();
-
         }
 
         return vUsers;
-
     }
 
-    static void _SaveUsersDataToFile(vector <clsUser> vUsers)
+    static void _SaveUsersDataToFile(vector<clsUser> vUsers)
     {
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::out);//overwrite
+        MyFile.open("Users.txt", ios::out); // overwrite
 
         string DataLine;
 
@@ -93,37 +111,31 @@ private:
             {
                 if (U.MarkedForDeleted() == false)
                 {
-                    //we only write records that are not marked for delete.  
+                    // we only write records that are not marked for delete.
                     DataLine = _ConverUserObjectToLine(U);
                     MyFile << DataLine << endl;
-
                 }
-
             }
 
             MyFile.close();
-
         }
-
     }
 
     void _Update()
     {
-        vector <clsUser> _vUsers;
+        vector<clsUser> _vUsers;
         _vUsers = _LoadUsersDataFromFile();
 
-        for (clsUser& U : _vUsers)
+        for (clsUser &U : _vUsers)
         {
             if (U.GetUserName() == GetUserName())
             {
                 U = *this;
                 break;
             }
-
         }
 
         _SaveUsersDataToFile(_vUsers);
-
     }
 
     void _AddNew()
@@ -132,7 +144,7 @@ private:
         _AddDataLineToFile(_ConverUserObjectToLine(*this));
     }
 
-    void _AddDataLineToFile(string  stDataLine)
+    void _AddDataLineToFile(string stDataLine)
     {
         fstream MyFile;
         MyFile.open("Users.txt", ios::out | ios::app);
@@ -144,7 +156,6 @@ private:
 
             MyFile.close();
         }
-
     }
 
     static clsUser _GetEmptyUserObject()
@@ -152,12 +163,38 @@ private:
         return clsUser(enMode::EmptyMode, "", "", "", "", "", "", 0);
     }
 
-public:
+    string _PreparelLogInRecord(string Seperator = "#//#")
+    {
+        string LogInRecord = "";
+        LogInRecord += clsDate::GetSystemDateTimeString() + Seperator;
+        LogInRecord += GetUserName() + Seperator;
+        LogInRecord += clsUtil::EncryptText(GetPassword()) + Seperator;
+        LogInRecord += to_string(GetPermissions());
 
+        return LogInRecord;
+    }
+    static stLogRegisterRecord _ConvertLineToLoginRegisterRecord(string Line, string Seperator = "#//#")
+    {
+        vector<string> vData;
+        vData = clsString::Split(Line, Seperator);
+
+        stLogRegisterRecord Record;
+
+        if (vData.size() < 4)
+            return Record;
+
+        Record.DateTime = vData[0];
+        Record.UserName = vData[1];
+        Record.Password = clsUtil::DecryptText(vData[2]);
+        Record.Permissions = stoi(vData[3]);
+
+        return Record;
+    }
+
+public:
     clsUser(enMode Mode, string FirstName, string LastName,
-        string Email, string Phone, string UserName, string Password,
-        int Permissions) :
-        clsPerson(FirstName, LastName, Email, Phone)
+            string Email, string Phone, string UserName, string Password,
+            int Permissions) : clsPerson(FirstName, LastName, Email, Phone)
 
     {
         _Mode = Mode;
@@ -165,9 +202,17 @@ public:
         _Password = Password;
         _Permissions = Permissions;
     }
-    enum enPermissions {
-        eAll = -1, pListClients = 1, pAddNewClient = 2, pDeleteClient = 4,
-        pUpdateClients = 8, pFindClient = 16, pTranactions = 32, pManageUsers = 64
+    enum enPermissions
+    {
+        eAll = -1,
+        pListClients = 1,
+        pAddNewClient = 2,
+        pDeleteClient = 4,
+        pUpdateClients = 8,
+        pFindClient = 16,
+        pTranactions = 32,
+        pManageUsers = 64,
+        pLoginRegister = 128
     };
     bool IsEmpty()
     {
@@ -189,7 +234,6 @@ public:
         _UserName = UserName;
     }
 
-
     void SetPassword(string Password)
     {
         _Password = Password;
@@ -209,12 +253,11 @@ public:
     {
         return _Permissions;
     }
-    
 
     static clsUser Find(string UserName)
     {
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("Users.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
@@ -230,7 +273,6 @@ public:
             }
 
             MyFile.close();
-
         }
 
         return _GetEmptyUserObject();
@@ -240,7 +282,7 @@ public:
     {
 
         fstream MyFile;
-        MyFile.open("Users.txt", ios::in);//read Mode
+        MyFile.open("Users.txt", ios::in); // read Mode
 
         if (MyFile.is_open())
         {
@@ -253,16 +295,20 @@ public:
                     MyFile.close();
                     return User;
                 }
-
             }
 
             MyFile.close();
-
         }
         return _GetEmptyUserObject();
     }
 
-    enum enSaveResults { svFaildEmptyObject = 0, svSucceeded = 1, svFaildUserExists = 2, svErroe = 3 };
+    enum enSaveResults
+    {
+        svFaildEmptyObject = 0,
+        svSucceeded = 1,
+        svFaildUserExists = 2,
+        svErroe = 3
+    };
 
     enSaveResults Save()
     {
@@ -287,7 +333,7 @@ public:
 
         case enMode::AddNewMode:
         {
-            //This will add new record to file or database
+            // This will add new record to file or database
             if (clsUser::IsUserExist(_UserName))
             {
                 return enSaveResults::svFaildUserExists;
@@ -295,7 +341,7 @@ public:
             else
             {
                 _AddNew();
-                //We need to set the mode to update after add new
+                // We need to set the mode to update after add new
                 _Mode = enMode::UpdateMode;
                 return enSaveResults::svSucceeded;
             }
@@ -315,17 +361,16 @@ public:
 
     bool Delete()
     {
-        vector <clsUser> _vUsers;
+        vector<clsUser> _vUsers;
         _vUsers = _LoadUsersDataFromFile();
 
-        for (clsUser& U : _vUsers)
+        for (clsUser &U : _vUsers)
         {
             if (U.GetUserName() == _UserName)
             {
                 U._MarkedForDelete = true;
                 break;
             }
-
         }
 
         _SaveUsersDataToFile(_vUsers);
@@ -333,7 +378,6 @@ public:
         *this = _GetEmptyUserObject();
 
         return true;
-
     }
 
     static clsUser GetAddNewUserObject(string UserName)
@@ -341,7 +385,7 @@ public:
         return clsUser(enMode::AddNewMode, "", "", "", "", UserName, "", 0);
     }
 
-    static vector <clsUser> GetUsersList()
+    static vector<clsUser> GetUsersList()
     {
         return _LoadUsersDataFromFile();
     }
@@ -355,8 +399,38 @@ public:
             return true;
         else
             return false;
-
     }
+    void RegisterLogin()
+    {
+        string DateLine = _PreparelLogInRecord();
+        fstream MyFile;
+        MyFile.open("LoginHistory.txt", ios::out | ios::app);
 
+        if (MyFile.is_open())
+        {
+            MyFile << DateLine << endl;
+            MyFile.close();
+        }
+    }
+    static vector<stLogRegisterRecord> GetLoginRegisterList()
+    {
+        vector<stLogRegisterRecord> vRecords;
+
+        fstream MyFile;
+        MyFile.open("LoginHistory.txt", ios::in); // read Mode
+
+        if (MyFile.is_open())
+        {
+            string Line;
+            while (getline(MyFile, Line))
+            {
+                stLogRegisterRecord Record = _ConvertLineToLoginRegisterRecord(Line);
+                vRecords.push_back(Record);
+            }
+
+            MyFile.close();
+        }
+
+        return vRecords;
+    }
 };
-

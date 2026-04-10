@@ -86,6 +86,7 @@ private:
             }
 
             _DrawScreenHeader("      Add New Client Screen");
+            _DrawUserAndDate(CurrentUser.GetUserName());
             _AddNewClient();
         }
    

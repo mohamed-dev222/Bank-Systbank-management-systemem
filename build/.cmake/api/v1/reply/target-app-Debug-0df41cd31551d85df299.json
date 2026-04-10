@@ -135,7 +135,10 @@
 				25,
 				26,
 				27,
-				28
+				28,
+				29,
+				30,
+				31
 			]
 		},
 		{
@@ -186,6 +189,11 @@
 		},
 		{
 			"backtrace" : 1,
+			"path" : "Models/clsCurrency.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
 			"path" : "Models/clsScreen.h",
 			"sourceGroupIndex" : 0
 		},
@@ -217,6 +225,16 @@
 		{
 			"backtrace" : 1,
 			"path" : "Screens/ClientScreen/clsUpdateClientScreen.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Screens/CurrencyScreen/clsCurrenciesListScreen.h",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "Screens/CurrencyScreen/clsCurrencyScreen.h",
 			"sourceGroupIndex" : 0
 		},
 		{

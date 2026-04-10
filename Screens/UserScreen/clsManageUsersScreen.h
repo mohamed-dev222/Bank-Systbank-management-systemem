@@ -21,7 +21,7 @@ private:
         eListUsers = 1, eAddNewUser = 2, eDeleteUser = 3,
         eUpdateUser = 4, eFindUser = 5, eMainMenue = 6
     };
-    static short _ReadTransactionMenueOption(string Text)
+    static short _ReadUserMenueOption(string Text)
     {
         cout << "\t\t\t\t " << Text;
         short Choose = clsInputValidate::ReadIntNumberBetween(1, 6);
@@ -112,7 +112,7 @@ private:
 
         case enManageUsersMenueOptions::eMainMenue:
         {
-            //do nothing here the main screen will handle it :-) ;
+            break;
         }
         }
 
@@ -142,7 +142,7 @@ public:
         cout << "\t\t\t\t ============================================\n";
         
 
-        _PerformManageUsersMenueOption((enManageUsersMenueOptions)_ReadTransactionMenueOption("Choose what do you want to do? [1 to 6]?"));
+        _PerformManageUsersMenueOption((enManageUsersMenueOptions)_ReadUserMenueOption("Choose what do you want to do? [1 to 6]?"));
     }
 
 };

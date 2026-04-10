@@ -3,5 +3,6 @@
         "**/*.exe": true,
         "**/*.o": true
     },
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "C_Cpp.errorSquiggles": "disabled"
 }

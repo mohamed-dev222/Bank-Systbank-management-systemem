@@ -62,55 +62,61 @@ private:
         {
 
 
-            Permissions += clsUser::enPermissions::pListClients;
+            Permissions |= clsUser::enPermissions::pListClients;
         }
 
         cout << "\nAdd New Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pAddNewClient;
+            Permissions |= clsUser::enPermissions::pAddNewClient;
         }
 
         cout << "\nDelete Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pDeleteClient;
+            Permissions |= clsUser::enPermissions::pDeleteClient;
         }
 
         cout << "\nUpdate Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pUpdateClients;
+            Permissions |= clsUser::enPermissions::pUpdateClients;
         }
 
         cout << "\nFind Client? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pFindClient;
+            Permissions |= clsUser::enPermissions::pFindClient;
         }
 
         cout << "\nTransactions? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pTranactions;
+            Permissions |= clsUser::enPermissions::pTranactions;
         }
 
         cout << "\nManage Users? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pManageUsers;
+            Permissions |= clsUser::enPermissions::pManageUsers;
         }
         cout << "\nLogin Register? y/n? ";
         cin >> Answer;
         if (Answer == 'y' || Answer == 'Y')
         {
-            Permissions += clsUser::enPermissions::pLoginRegister;
+            Permissions |= clsUser::enPermissions::pLoginRegister;
+        }
+        cout << "\nCurrency Screen? y/n? ";
+        cin >> Answer;
+        if (Answer == 'y' || Answer == 'Y')
+        {
+            Permissions |= clsUser::enPermissions::pCurrencyScreen;
         }
 
 

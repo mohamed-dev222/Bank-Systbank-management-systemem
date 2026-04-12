@@ -106,6 +106,8 @@ public:
 		system("cls");
 		if (!CheckAccessRights(clsUser::enPermissions::pTranactions))
 		{
+			cout << setw(37) << left << "" << "\n\tPress any key to go back to Main Menue...\n";
+		    system("pause>0");
 			return; // this will exit the function and it will not continue
 		}
 		_DrawScreenHeader("      Transaction Screen");

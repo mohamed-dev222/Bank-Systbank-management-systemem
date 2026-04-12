@@ -29,7 +29,8 @@ private:
 		eManageUsers = 7,
 		eLoginRegister = 8,
 		eCurrencyExchange = 9,
-		eExit = 10
+		eLogin = 10,
+		eExit = 11
 	};
 	static void _GoBackToMainMenue()
 	{
@@ -88,7 +89,7 @@ private:
 	static short _ReadMainMenueOption(string Text)
 	{
 		cout << "\t\t\t\t " << Text;
-		short Choose = clsInputValidate::ReadIntNumberBetween(1, 10);
+		short Choose = clsInputValidate::ReadIntNumberBetween(1, 11);
 		return Choose;
 	}
 	static void _PerfromMainMenueOption(enMainMenueOptions MainMenueOption)
@@ -134,14 +135,14 @@ private:
 		{
 			system("cls");
 			_ShowTransactionsMenue();
-			_GoBackToMainMenue();
+		    ShowMainMenue();
 			break;
 		};
 		case enMainMenueOptions::eManageUsers:
 		{
 			system("cls");
 			_ShowManageUsersMenue();
-			_GoBackToMainMenue();
+		    ShowMainMenue();
 			break;
 		};
 		case enMainMenueOptions::eLoginRegister:
@@ -155,19 +156,25 @@ private:
 		{
 			system("cls");
 			_ShowCurrencyScreen();
-			_GoBackToMainMenue();
+		    ShowMainMenue();
 			break;
 		};
-		case enMainMenueOptions::eExit:
+		case enMainMenueOptions::eLogin:
 		{
 			system("cls");
 			_Logout();
 			break;
 		};
-		}
+		case enMainMenueOptions::eExit:
+		{
+			exit(0);
+			break;
+		};
 	}
+}
 
 public:
+
 	static void ShowMainMenue()
 	{
 		system("cls");
@@ -177,9 +184,9 @@ public:
 		cout << "\t\t\t\t ============================================";
 		cout << "\n\t\t\t\t\t\t" << setw(25) << "Main Menue";
 		cout << "\n\t\t\t\t ============================================\n";
-		string Text[10] = {"Show Client List.", "Add New Client.", "Delete Client.", "Update Client Info.", "Find Client.", "Transaction.", "Manage Users.", "Login Register.", "Currency Exchange.", "Logout."};
-		_MenuOptionsScreen(10, Text);
+		string Text[11] = {"Show Client List.", "Add New Client.", "Delete Client.", "Update Client Info.", "Find Client.", "Transaction.", "Manage Users.", "Login Register.", "Currency Exchange.", "Logout.", "Exit."};
+		_MenuOptionsScreen(11, Text);
 		cout << "\t\t\t\t ============================================\n";
-		_PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption("Choose What Do You Want To Do? [1 to 10]? "));
+		_PerfromMainMenueOption((enMainMenueOptions)_ReadMainMenueOption("Choose What Do You Want To Do? [1 to 11]? "));
 	}
 };

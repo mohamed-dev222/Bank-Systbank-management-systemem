@@ -212,7 +212,8 @@ public:
         pFindClient = 16,
         pTranactions = 32,
         pManageUsers = 64,
-        pLoginRegister = 128
+        pLoginRegister = 128,
+        pCurrencyScreen = 256
     };
     bool IsEmpty()
     {
